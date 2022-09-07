@@ -5,6 +5,7 @@ ConsoleKeyInfo MenuInput;
 do
 {
     WriteLine();
+    WriteLine("MAIN MENU");
     WriteLine("Press key 1-2 to select Calculator version or ESC to exit: ");
 
     MenuInput = Console.ReadKey(true);
@@ -28,47 +29,51 @@ void CalculatorV01()
 {
     WriteLine();
     WriteLine("---------- Basic Calculator ----------");
-    WriteLine();
 
-    var value1 = GetNumericInputFromUser("Enter a number: ");
-    if (!value1.HasValue) return;
-
-    Write("Press an operator key [ + - * / ]:");
-    var key = GetMathKeyFromUser();
-    if (key == ConsoleKey.Escape) return;
-    WriteLine();
-
-    var value2 = GetNumericInputFromUser("Enter a second number: ");
-    if (!value2.HasValue) return;
-
-    decimal? CalcResult = null;
-
-    switch (key)
+    while(true)
     {
-        case ConsoleKey.Add:
-            CalcResult = value1.Value + value2.Value;
-            break;
+        WriteLine();
+        var value1 = GetNumericInputFromUser("Enter a number: ");
+        if (!value1.HasValue) return;
 
-        case ConsoleKey.Subtract:
-            CalcResult = value1.Value - value2.Value;
-            break;
+        Write("Press an operator key [ + - * / ]:");
+        var key = GetMathKeyFromUser();
+        if (key == ConsoleKey.Escape) return;
+        WriteLine();
 
-        case ConsoleKey.Multiply:
-            CalcResult = value1.Value * value2.Value;
-            break;
+        var value2 = GetNumericInputFromUser("Enter a second number: ");
+        if (!value2.HasValue) return;
 
-        case ConsoleKey.Divide:
-            if (value2.Value != 0)
-            {
-                CalcResult = value1.Value / value2.Value;
-            }
-            break;
+        decimal? CalcResult = null;
 
-        default:
-            throw new Exception("Should not happen!");
+        switch (key)
+        {
+            case ConsoleKey.Add:
+                CalcResult = value1.Value + value2.Value;
+                break;
+
+            case ConsoleKey.Subtract:
+                CalcResult = value1.Value - value2.Value;
+                break;
+
+            case ConsoleKey.Multiply:
+                CalcResult = value1.Value * value2.Value;
+                break;
+
+            case ConsoleKey.Divide:
+                if (value2.Value != 0)
+                {
+                    CalcResult = value1.Value / value2.Value;
+                }
+                break;
+
+            default:
+                throw new Exception("Should not happen!");
+        }
+
+        WriteLine($"The result is {(CalcResult.HasValue ? CalcResult.Value : "not possible to calculate!")}");
     }
 
-    WriteLine($"The result is: {(CalcResult.HasValue ? CalcResult.Value : "not possible to calculate!")}");
 }
 
 
