@@ -20,6 +20,11 @@ do
         case ConsoleKey.NumPad2:
             Calculator02();
             break;
+
+        case ConsoleKey.D3:
+        case ConsoleKey.NumPad3:
+            Calculator03();
+            break;
     }
 }
 while (MenuInput.Key != ConsoleKey.Escape);
@@ -108,6 +113,25 @@ async void Calculator02()
     }
 }
 
+void Calculator03()
+{
+    //Console.CursorSize = 1;
+    Console.SetCursorPosition(10, 10);
+    Write("XYZ");
+    ReadKey(true);
+    Console.SetCursorPosition(11, 10);
+    Write("1 ");
+    Console.SetCursorPosition(12, 10);
+    ReadKey(true);
+
+}
+
+//(decimal value, int op) GetUserInput2() 
+//{
+//    return new(1.2,2);
+
+//}
+
 
 
 
@@ -132,12 +156,14 @@ ConsoleKey GetMathKeyFromUser ()
                 return ConsoleKey.Subtract;
 
             case ConsoleKey.Divide:
+            case ConsoleKey.D7 when keyinfo.Modifiers == ConsoleModifiers.Shift:
                 Write("/");
-                return keyinfo.Key;
+                return ConsoleKey.Divide;
 
             case ConsoleKey.Multiply:
+            case ConsoleKey.Oem2 when keyinfo.Modifiers == ConsoleModifiers.Shift:
                 Write("*");
-                return keyinfo.Key;
+                return ConsoleKey.Multiply;
 
             case ConsoleKey.Escape:
                 return keyinfo.Key;
