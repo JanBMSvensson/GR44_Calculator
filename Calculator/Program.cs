@@ -41,7 +41,7 @@ void CalculatorV01()
         var value1 = GetNumericInputFromUser("Enter a number: ");
         if (!value1.HasValue) return;
 
-        Write("Press an operator key [ + - * / ]:");
+        Write("Press an operator key [ + - * / ] or [ A S M D ]:");
         var key = GetMathKeyFromUser();
         if (key == ConsoleKey.Escape) return;
         WriteLine();
@@ -147,21 +147,25 @@ ConsoleKey GetMathKeyFromUser ()
         {
             case ConsoleKey.OemPlus:
             case ConsoleKey.Add:
+            case ConsoleKey.A:
                 Write("+");
                 return ConsoleKey.Add;
 
             case ConsoleKey.OemMinus:
             case ConsoleKey.Subtract:
+            case ConsoleKey.S:
                 Write("-");
                 return ConsoleKey.Subtract;
 
             case ConsoleKey.Divide:
             case ConsoleKey.D7 when keyinfo.Modifiers == ConsoleModifiers.Shift:
+            case ConsoleKey.D:
                 Write("/");
                 return ConsoleKey.Divide;
 
             case ConsoleKey.Multiply:
             case ConsoleKey.Oem2 when keyinfo.Modifiers == ConsoleModifiers.Shift:
+            case ConsoleKey.M:
                 Write("*");
                 return ConsoleKey.Multiply;
 
