@@ -1,4 +1,5 @@
 ﻿
+using GR44_Calculator;
 using static System.Console;
 
 ConsoleKeyInfo MenuInput;
@@ -54,21 +55,29 @@ void CalculatorV01()
         switch (key)
         {
             case ConsoleKey.Add:
-                CalcResult = value1.Value + value2.Value;
+                CalcResult = Calculator.Add(value1.Value, value2.Value);
                 break;
 
             case ConsoleKey.Subtract:
-                CalcResult = value1.Value - value2.Value;
+                CalcResult = Calculator.Subtract(value1.Value, value2.Value);
                 break;
 
             case ConsoleKey.Multiply:
-                CalcResult = value1.Value * value2.Value;
+                CalcResult = Calculator.Multiply(value1.Value, value2.Value);
                 break;
 
             case ConsoleKey.Divide:
-                if (value2.Value != 0)
+                try
                 {
-                    CalcResult = value1.Value / value2.Value;
+                    CalcResult = Calculator.Divide(value1.Value, value2.Value);
+                }
+                catch (DivideByZeroException)
+                {
+                    WriteLine("You shouldn't divide by 0");
+                }
+                catch (Exception ex)
+                {
+                    WriteLine($"Some other error: {ex.Message}");
                 }
                 break;
 
